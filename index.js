@@ -1,5 +1,9 @@
 
-var amqp = require('amqplib/callback_api');
+const connectTODatabase = require('./db');
+
+const amqp = require("amqplib/callback_api");
+
+connectTODatabase();
 
 amqp.connect('amqp://localhost', function(error0, connection) {
     if (error0) {
@@ -10,7 +14,7 @@ amqp.connect('amqp://localhost', function(error0, connection) {
             throw error1;
         }
 
-        var queue = 'hello';
+        let queue = 'fetchData';
 
         channel.assertQueue(queue, {
             durable: true
